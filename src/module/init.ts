@@ -1,10 +1,10 @@
 import puppeteer from 'puppeteer';
 import toGroup from './toGroup';
 
-export default async function init(groupName: string, groupId: string) {
+export default async function init(groupName: string, groupId: string,headless : boolean) {
     let isLogin = false;
     try {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({headless});
         const page = await browser.newPage();
         await page.goto('https://id.zalo.me/account?continue=https://chat.zalo.me');
         
@@ -13,7 +13,7 @@ export default async function init(groupName: string, groupId: string) {
             if (url.startsWith("https://chat.zalo.me/") && !isLogin) {
                 isLogin = true;
                 console.log("logined");
-                await toGroup(page, "Nhóm hỏi bài", '#group-item-g1778418226826539279');
+                await toGroup(page, groupName, groupId);
                 // Remove the event listener after the condition is met
                 page.off("framenavigated");
             }

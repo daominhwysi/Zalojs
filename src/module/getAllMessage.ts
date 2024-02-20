@@ -14,6 +14,5 @@ export default async function getAllMessage(page: any) {
 
         return { messageId, content, time };
     });
-    console.log(messages)
     return messages;
 }

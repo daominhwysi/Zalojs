@@ -1,10 +1,14 @@
 {
-  "name": "librezaloapi",
-  "description": "an unofficial API to interaction with Zalo",
+  "name": "zalojs",
+  "description": "This is a API to control Zalo over the DevTools Protocol which is allow you to make a Client bot",
   "version": "0.0.1",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "homepage": "https://daominh.space",
+  "repository": {
+    "url": "git+https://github.com/DaQMinh/Zalo.js.git"
+  },
   "scripts": {
     "build": "tsup",
     "test": "nodemon test/main.ts"

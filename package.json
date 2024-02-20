@@ -1,0 +1,26 @@
+{
+  "name": "librezaloapi",
+  "description": "an unofficial API to interaction with Zalo",
+  "version": "0.0.1",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "test": "nodemon test/main.ts"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "nodemon": "^3.0.3",
+    "puppeteer": "^22.1.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  },
+  "keywords": [
+    "Zalo"
+  ],
+  "author": "MinhBacKy",
+  "license": "ISC"
+}

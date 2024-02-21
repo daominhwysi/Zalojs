@@ -1,20 +1,20 @@
 import puppeteer from 'puppeteer';
 import toGroup from './toGroup';
-
-export default async function init(groupName: string, groupId: string,headless : boolean) {
+import EventEmitter from 'events';
+import { Client } from '..';
+const eventEmitter = new EventEmitter();
+export default async function init(groupName: string, groupId: string, headless : boolean) {
     let isLogin = false;
     try {
         const browser = await puppeteer.launch({headless});
         const page = await browser.newPage();
         await page.goto('https://id.zalo.me/account?continue=https://chat.zalo.me');
-        
         page.on("framenavigated", async (frame: any) => {
             const url = frame.url(); // the new url
             if (url.startsWith("https://chat.zalo.me/") && !isLogin) {
                 isLogin = true;
-                console.log("logined");
                 await toGroup(page, groupName, groupId);
-                // Remove the event listener after the condition is met
+                eventEmitter.emit('initialized')
                 page.off("framenavigated");
             }
         });
@@ -26,3 +26,4 @@ export default async function init(groupName: string, groupId: string,headless :
         throw error; 
     }
 }
+export { eventEmitter };

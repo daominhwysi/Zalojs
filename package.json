@@ -1,7 +1,7 @@
 {
   "name": "zalojs",
-  "description": "This is a API to control Zalo over the DevTools Protocol which is allow you to make a Client bot",
-  "version": "0.0.1",
+  "description": "This is an API to control Zalo over the DevTools Protocol which is allow you to make a Client bot",
+  "version": "0.0.2727",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -16,7 +16,8 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "nodemon": "^3.0.3",
-    "puppeteer": "^22.1.0"
+    "puppeteer": "^22.1.0",
+    "zalojs": "^0.0.169"
   },
   "devDependencies": {
     "tsup": "^8.0.2",

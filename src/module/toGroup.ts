@@ -1,3 +1,4 @@
+
 export default async function toGroup(page: any, groupName: string, groupId: string) {
     const selector = "#main-tab > div:nth-child(1) > div.nav__tabs__top > div.clickable.leftbar-tab.flx.flx-col.flx-al-c.flx-center.rel.selected";
     await page.waitForSelector(selector);

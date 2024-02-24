@@ -11,8 +11,12 @@ export default async function getAllMessage(page: any) {
         const messageId = $('.chat-message').attr('id');
         const content = $('.text').text();
         const time = $('.card-send-time__sendTime').text();
-
-        return { messageId, content, time };
+        let senderName = $(item).find('.card-sender-name span').text().trim();
+        // Nếu không tìm thấy tên người gửi, gán mặc định là "Minh"
+        if (!senderName) {
+            senderName = "Minh";
+        }
+        return { messageId, content, time , senderName };
     });
     return messages;
 }

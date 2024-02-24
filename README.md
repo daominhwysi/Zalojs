@@ -28,7 +28,8 @@
   <h3 align="center">Zalo.js</h3>
 
   <p align="center">
-    an API to control Zalo over the DevTools Protocol based which is allow you to make a Client bot
+    an API to control Zalo over the DevTools Protocol which is allow you to make a Client bot
+    <br/>
     May cai link ben duoi cho dep chu deo co gi dau
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
@@ -81,8 +82,6 @@ _Below is an example of how you can instruct your audience on installing and set
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 ```ts
 import { Client, init } from 'zalojs';

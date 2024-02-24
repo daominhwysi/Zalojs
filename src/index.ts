@@ -6,7 +6,6 @@ import getAllMessage from './module/getAllMessage';
 import sendMessage from './module/sendMessage';
 import renderPDF from './module/capture';
 import toGroup from './module/toGroup';
-import createPoll from './module/createPoll';
 export { init };
 
 export class Client {
@@ -29,9 +28,6 @@ export class Client {
             case 'message':
                 await messageListener(this.page, callback);
                 break;
-            case 'ready':
-                eventEmitter.once('ready', () => callback(this.user)); // Truyền dữ liệu user vào callback
-                break;
             // Thêm các trường hợp xử lý sự kiện khác nếu cần
         }
     }
@@ -48,7 +44,7 @@ export class Client {
                 });
                 break;
             case 'ready':
-                eventEmitter.on('ready', () => callback());
+                eventEmitter.on('ready', () => callback(this.user));
                 break;
             // Thêm các trường hợp xử lý sự kiện khác nếu cần
         }
@@ -63,9 +59,7 @@ export class Client {
             }
         }
     }
-    async mPolls(title: string, choices: string[]): Promise<void> {
-        createPoll(this.page,title, choices)
-    }
+
     async getAllMsg(): Promise<void> {
         await getAllMessage(this.page);
     }

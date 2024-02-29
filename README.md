@@ -34,7 +34,7 @@ Zalo.JS is a project that offers an API for controlling the Zalo client programm
 
 2. **Installation:** Install the Zalo.JS package by running 
   ```sh
-  npm i zalo.js@latest
+  npm i zalojs@latest
   ```
 
 <!-- USAGE EXAMPLES -->

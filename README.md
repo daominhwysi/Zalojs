@@ -1,7 +1,8 @@
 
 <div align="center">
 <p>
- <image src="https://gist.githubusercontent.com/DaQMinh/0407639babdc216a78156c1ed27672af/raw/6c8aedd90fb26639730393e1101bd0d7257f8388/logo.svg" alt="logo">
+ <img src="https://gist.githubusercontent.com/DaQMinh/0407639babdc216a78156c1ed27672af/raw/6c8aedd90fb26639730393e1101bd0d7257f8388/logo.svg" alt="My Logo">
+
 </p>
 <a>
 <img src="https://img.shields.io/badge/Zalo-Join-5bc0de?style=for-the-badge)" alt="Zalo Badge">

@@ -41,7 +41,7 @@ Zalo.JS is a project that offers an API for controlling the Zalo client programm
 ### Usage
 
 ```js
-import Client, { init } from "zalo.js";
+import Client, { init } from "zalojs";
 import config from "./config.json";
 
 (async () => {

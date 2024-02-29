@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
 import { Page } from 'puppeteer';
-
-export default async function getAllMessage(page: Page,user : { name: string; bio: string; birth: string; number: string; } | null) {
+import {User,UserCallBack} from '../../types/user';
+export default async function getAllMessage(page: Page,user : User | null) {
     const elements = await page.evaluate(() => {
         const elements = document.querySelectorAll('[id*=bb_msg_id_]');
         return Array.from(elements).map(element => element.outerHTML);

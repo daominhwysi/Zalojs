@@ -1,9 +1,10 @@
 import getAllMessage from './getAllMessage';
 import * as cheerio from 'cheerio';
-import sendMessage from './sendMessage';
+import sendMessage from '../../actions/sendMessage';
 import { Page } from 'puppeteer';
-
-export default async function messageListener(page: Page, callback: Function,user : { name: string; bio: string; birth: string; number: string; } | null): Promise<void> {
+import {User} from '../../types/user';
+import Callback from '../../types/MessageListener';
+export default async function messageListener(page: Page, callback: Callback, user : User | null): Promise<void> {
     let firstMessage = true;
     let messageArray : any[] = [];
 
@@ -63,7 +64,7 @@ export default async function messageListener(page: Page, callback: Function,use
                     console.log('No elements found between the selectors');
                 }
             }
-            callback({
+            callback ({
               content : messageArray[messageArray.length - 1].content,
               time : messageArray[messageArray.length - 1].time,
               messageId : messageArray[messageArray.length - 1].messageId,

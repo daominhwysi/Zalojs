@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "jsx": "preserve",
         "strict": true,
         "noImplicitAny": true,
         "esModuleInterop": true,
@@ -13,6 +14,6 @@
         "resolveJsonModule": true,
         "outDir": "dist"
     },
-    "include": ["src"],
+    "include": ["src", "src/core/init.ts"],
     "exclude": ["node_modules"]
 }

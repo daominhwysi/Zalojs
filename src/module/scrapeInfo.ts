@@ -1,4 +1,6 @@
-export default async function scrapeData(page: any): Promise<any> {
+import { Page } from "puppeteer";
+
+export default async function scrapeData(page: Page): Promise<any> {
     await page.click('#main-tab > div.nav__tabs__bottom > div:nth-child(3)');
     await page.waitForSelector('body > div.popover-v3');
 
@@ -16,5 +18,6 @@ export default async function scrapeData(page: any): Promise<any> {
     const cornerX = 0;
     const cornerY = 0;
     await page.mouse.click(cornerX, cornerY);
-    return { name, bio, birth, number };
+    const info : Object = { name, bio, birth, number };
+    return info
 }

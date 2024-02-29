@@ -1,7 +1,6 @@
 import puppeteer from 'puppeteer';
 import toGroup from './toGroup';
 import EventEmitter from 'events';
-import { Client } from '..';
 const eventEmitter = new EventEmitter();
 export default async function init(groupName: string, groupId: string, headless : boolean) {
     let isLogin = false;

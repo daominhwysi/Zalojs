@@ -1,8 +1,9 @@
 import getAllMessage from './getAllMessage';
 import * as cheerio from 'cheerio';
 import sendMessage from './sendMessage';
+import { Page } from 'puppeteer';
 
-export default async function messageListener(page: any, callback: Function): Promise<void> {
+export default async function messageListener(page: Page, callback: Function,user : { name: string; bio: string; birth: string; number: string; } | null): Promise<void> {
     let firstMessage = true;
     let messageArray : any[] = [];
 
@@ -11,7 +12,7 @@ export default async function messageListener(page: any, callback: Function): Pr
     page.on('request', async (interceptedRequest : any) => {
         if (interceptedRequest.url().startsWith("https://tt-group-wpa.chat.zalo.me/api/group/deliveredv2")) {
             if (firstMessage) {
-                messageArray = await getAllMessage(page);
+                messageArray = await getAllMessage(page,user);
                 firstMessage = false;
             } else {
                 const getElementsBetweenSelectors = async (startSelector: string, endSelector: string): Promise<string[] | null> => {
@@ -49,8 +50,10 @@ export default async function messageListener(page: any, callback: Function): Pr
                         const messageId = $('.chat-message').attr('id');
                         let senderName = $(item).find('.card-sender-name span').text().trim();
                         // Nếu không tìm thấy tên người gửi, gán mặc định là "Minh"
-                        if (!senderName) {
-                            senderName = "Minh";
+                        if (!senderName && user?.name) {
+                            senderName = user.name
+                        } else {
+                            senderName = "Client"
                         }
 
                         return { messageId, content, time , senderName };

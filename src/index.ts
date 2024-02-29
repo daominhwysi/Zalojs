@@ -10,7 +10,7 @@ export { init };
 
 export class Client {
     private page: any;
-    public user: { tag: string } | null;
+    public user: { name : string , bio : string, birth : string, number : string} | null;
     constructor(page: any) {
         this.page = page;
         this.user = null
@@ -26,7 +26,7 @@ export class Client {
     async on(event : string, callback : Function): Promise<void>{
         switch (event) {
             case 'message':
-                await messageListener(this.page, callback);
+                await messageListener(this.page, callback,this.user);
                 break;
             // Thêm các trường hợp xử lý sự kiện khác nếu cần
         }
@@ -61,7 +61,7 @@ export class Client {
     }
 
     async getAllMsg(): Promise<void> {
-        await getAllMessage(this.page);
+        await getAllMessage(this.page,this.user);
     }
 
     async capture(): Promise<void> {

@@ -1,10 +1,11 @@
 import { Client, init } from '../dist/index.js';
-
+import config from '../config.json'
 (async () => {
     // turn headless to true when deploy
-    const { browser, page } = await init('Testing', '#group-item-g5701541405487732670', false);
+    const { browser , page } = await init(config.gname , config.gselector, false);
     const client = new Client(page);
     const prefix = '!';
+    
     await client.once('ready',async (user: any) => {
       console.log(`Logged in as ${user.name}`)
     })

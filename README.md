@@ -1,7 +1,7 @@
 
 <div align="center">
 <p>
- <img src="https://gist.githubusercontent.com/DaQMinh/0407639babdc216a78156c1ed27672af/raw/6c8aedd90fb26639730393e1101bd0d7257f8388/logo.svg" alt="My Logo">
+<img src="https://raw.github.com/potherca-blog/StackOverflow/master/question.13808020.include-an-svg-hosted-on-github-in-markdown/controllers_brief.svg">
 
 </p>
 <a>

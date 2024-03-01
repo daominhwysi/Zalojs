@@ -1,17 +1,15 @@
 import getAllMessage from './getAllMessage';
 import * as cheerio from 'cheerio';
 import sendMessage from '../../actions/sendMessage';
-import { Page } from 'puppeteer';
+import { HTTPRequest, Page } from 'puppeteer';
 import {User} from '../../types/user';
-import Callback from '../../types/MessageListener';
-export default async function messageListener(page: Page, callback: Callback, user : User | null): Promise<void> {
+export default async function messageListener(page: Page, callback: Function, user : User | null): Promise<void> {
     let firstMessage = true;
     let messageArray : any[] = [];
 
-    await page.setRequestInterception(true);
-
-    page.on('request', async (interceptedRequest : any) => {
-        if (interceptedRequest.url().startsWith("https://tt-group-wpa.chat.zalo.me/api/group/deliveredv2")) {
+    page.on('request', async (request : HTTPRequest) => {
+        if (request.url().startsWith("https://tt-group-wpa.chat.zalo.me/api/group/deliveredv2")) {
+            console.log('A message have been sent')
             if (firstMessage) {
                 messageArray = await getAllMessage(page,user);
                 firstMessage = false;
@@ -80,6 +78,5 @@ export default async function messageListener(page: Page, callback: Callback, us
               }
           })
         }
-        interceptedRequest.continue();
     });
 }

@@ -28,7 +28,9 @@ export default class Client {
     async sendMessage(message: string): Promise<void> {
         await this.actions.sendMessage(message);
     }
-
+    async sendImage(path : string): Promise<void> {
+        this.actions.sendImage(path)
+    }
     async toGroup(groupName: string, groupSelector: string): Promise<void> {
         await this.actions.toGroup(groupName, groupSelector);
     }

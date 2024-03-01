@@ -10,14 +10,14 @@ import config from '../config.json'
     const client = new Client(page)
 // Assuming 'client' is your chat client instance
 
-client.on('message', (message: MessageCallback) => {
-      // Accessing properties of the message object
-      console.log('Content:', message.content);
-      console.log('Time:', message.time);
-      console.log('Message ID:', message.messageId);
-      console.log('Author Name:', message.author.name);
-      message.author.reply('Your reply here')
-});
+    client.on('message', (message: MessageCallback) => {
+          // Accessing properties of the message object
+          console.log('Content:', message.content);
+          console.log('Time:', message.time);
+          console.log('Message ID:', message.messageId);
+          console.log('Author Name:', message.author.name);
+          message.author.reply('Your reply here')
+    });
 
     client.once('ready',(user : User) => {
       console.log(user)

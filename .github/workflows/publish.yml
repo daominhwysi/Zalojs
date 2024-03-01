@@ -26,4 +26,4 @@ jobs:
           publish: npm run build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
-          NPM_TOKEN: ${{ secrets.NPMTOKEN }}
+          NPM_TOKEN: ${{ secrets.NPMTOKEN }} 

@@ -3,38 +3,33 @@ name: Publish
 on:
   push:
     branches:
-      - main
+      - main  # adjust this to your main branch name
 
 jobs:
-  version_patch_and_publish:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Use Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # adjust to your Node.js version
-
-      - name: Set up Git
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
+          node-version: '14'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Bump version
-        run: npm version patch
-
-      - name: Commit version bump
+      - name: Update version and publish
         run: |
-          git add package.json package-lock.json
-          git commit -m "Bump version to $(node -p -e "require('./package.json').version")"
-
-      - name: Publish to npm
-        run: npm publish --access public
+          # Update the version (e.g., patch, minor, major)
+          npm version patch
+          
+          # Authenticate with npm (replace <NPM_TOKEN> with your npm token)
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          
+          # Publish to npm
+          npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}  # Ensure you have this token set in your repository secrets
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

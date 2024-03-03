@@ -20,12 +20,26 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.x'  # Adjust Node.js version if needed
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build && npm run lint
+      - name: Set up Git
+        run: |
+          git config --global user.email "daominhwysi@gmail.com"
+          git config --global user.name "DaQMinh"
+
+      - name: Commit changes
+        run: |
+          git add package-lock.json
+          git commit -m "chore: Update package-lock.json"
 
       - name: Install dependencies
         run: npm install
 
-      - name: Patch NPM package version
+      - name: Bump version
         run: npm version patch
 
-      - name: Build
-        run: npm run build && npm run lint
+      - name: Push changes
+        run: |
+          git push --follow-tags

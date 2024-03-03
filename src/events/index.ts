@@ -34,11 +34,11 @@ export default class Events {
         }
     }
 
-    async once(event: string, callback: (user: User ) => void): Promise<void> {
+    async once(event: string, callback: () => void): Promise<void> {
         switch (event) {
             case "ready":
                 // When 'ready' event occurs, invoke the callback with the current user
-                events.once('ready', () => callback(this.user));
+                events.once('ready', () => callback());
                 break;
             default:
                 console.log("It's something else.");

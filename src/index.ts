@@ -21,7 +21,7 @@ export default class Client {
         await this.events.on(event, callback);
     }
 
-    async once(event: string, callback: (user: User ) => void): Promise<void> {
+    async once(event: string, callback: () => void): Promise<void> {
         await this.events.once(event, callback);
     }
 

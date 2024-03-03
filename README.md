@@ -40,8 +40,13 @@ Zalo.JS is a project that offers an API for controlling the Zalo client programm
 ### Usage
 
 ```js
-import Client, { init } from "zalojs";
-import config from "./config.json";
+const { init } = require('../dist/index.js');
+const config = require('./config.json');
+const Client = require('../dist/index.js').default;
+const fs = require('fs');
+const path = require('path');
+
+const prefix = '!';
 
 (async () => {
   const { browser, page } = await init({
@@ -49,16 +54,30 @@ import config from "./config.json";
     groupSelector: config.gselector,
     headless: config.headless,
   });
+
   const client = new Client(page);
 
-  client.on("message", (message) => {
-    console.log(message);
+  client.on('message', async (message) => {
+    console.log(message)
+    if (!message.content.startsWith(prefix)) return;
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const commandName = args.shift().toLowerCase();
+
+    try {
+    if (command === 'ping') {
+      await client.send({ message :'!Pong' });
+    }
+    } catch (error) {
+      console.log(error);
+      await client.send({ message :'There was an error executing the command.' });
+    }
   });
 
-  client.once("ready", (user) => {
-    console.log(user);
+  client.once('ready', () => {
+    console.log('Bot is ready!');
   });
 })();
+
 ```
 **Config File:**
 ```json

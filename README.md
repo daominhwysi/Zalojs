@@ -1,7 +1,7 @@
 
 <div align="center">
 <p>
-  <img src="https://raw.githubusercontent.com/DaQMinh/Zalo.js/main/public/logo.svg" alt="Zalo">
+  <img src="https://raw.githubusercontent.com/DaQMinh/Zalojs/main/public/logo.svg" alt="Zalo">
 </p>
 <a>
 

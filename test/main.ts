@@ -1,25 +1,16 @@
-import Client, { User , MessageCallback , init } from "../dist/index.js";
-import config from '../config.json'
+import * as cherio from 'cheerio';
 
-(async () => {
-    const { browser , page } = await init({
-      groupName : config.gname,
-      groupSelector : config.gselector,
-      headless : false
-    })
-    const client = new Client(page)
-// Assuming 'client' is your chat client instance
+// HTML string bạn đã cung cấp
+const html: string = `<div class="chat-message wrap-message rotate-container me  -send-time -reaction bubble-jump-target" id="bb_msg_id_1709450047758" data-node-type="bubble-message"><div class="" style="display: flex; width: 100%; justify-content: flex-end;"><div class="chat-message__actionholder  me  last-msg has-status " style="min-width: 116px;"></div><div class="card card-with-reaction-v2  me  last-msg has-status  card--text" data-id="div_LastSentMsg_Text"><div-13 class="card-sender-name hidden"><span style="padding: 2px 10px 0px 2px; cursor: pointer;"></span></div-13><div><span-15 id="mtc-5212495247434"><span class="emoji-sizer emoji-outer  larger" style="background-size: 5100%; background-repeat: no-repeat; -webkit-user-drag: element; background-image: url(&quot;assets/emoji.1e7786c93c8a0c1773f165e2de2fd129.png?v=20180604&quot;); background-position: 84% 82.5%; margin: 0px 0px -3px;">/-strong</span></span-15></div><div style="margin-top: 10px;"><div class="card-send-time flx flx-al-c flx-1 me   preview-ts__first-msg"><span-13 classname="card-send-time__sendTime" class="card-send-time__sendTime">14:14</span-13></div></div><div class="message-reaction-container message-reaction-container-v2 has-send-time  me  show-react-btn"><div id="reaction-btn-5212495247434" data-id="btn_LastSentMsg_React" style="position: relative;"><div class="msg-reaction-icon reaction-shadow react-icon"><span style="pointer-events: none;"><img class="default-react-icon-thumb" src="https://res-zalo.zadn.vn/upload/media/2019/1/25/iconlike_1548389696575_103596.png"></span></div><div class="emoji-list-wrapper me hide-elist"><div class="reaction-emoji-list"><div class="reaction-emoji-icon" style="animation-delay: 20ms;"><span class="emoji-sizer emoji-outer " style="background-size: 5100%; background-repeat: no-repeat; -webkit-user-drag: none; background-image: url(&quot;assets/emoji-md.6fa8afb705db684e87d22868d5d85557.png?v=20222710&quot;); background-position: 84% 82.5%; margin: -1px; position: relative; top: 2px;">/-strong</span></div><div class="reaction-emoji-icon" style="animation-delay: 40ms;"><span class="emoji-sizer emoji-outer " style="background-size: 5100%; background-repeat: no-repeat; -webkit-user-drag: none; background-image: url(&quot;assets/emoji-md.6fa8afb705db684e87d22868d5d85557.png?v=20222710&quot;); background-position: 84% 72.5%; margin: -1px; position: relative; top: 2px;">/-heart</span></div><div class="reaction-emoji-icon" style="animation-delay: 60ms;"><span class="emoji-sizer emoji-outer " style="background-size: 5100%; background-repeat: no-repeat; -webkit-user-drag: none; background-image: url(&quot;assets/emoji-md.6fa8afb705db684e87d22868d5d85557.png?v=20222710&quot;); background-position: 82% 7.5%; margin: -1px; position: relative; top: 2px;">:&gt;</span></div><div class="reaction-emoji-icon" style="animation-delay: 80ms;"><span class="emoji-sizer emoji-outer " style="background-size: 5100%; background-repeat: no-repeat; -webkit-user-drag: none; background-image: url(&quot;assets/emoji-md.6fa8afb705db684e87d22868d5d85557.png?v=20222710&quot;); background-position: 84% 20%; margin: -1px; position: relative; top: 2px;">:o</span></div><div class="reaction-emoji-icon" style="animation-delay: 100ms;"><span class="emoji-sizer emoji-outer " style="background-size: 5100%; background-repeat: no-repeat; -webkit-user-drag: none; background-image: url(&quot;assets/emoji-md.6fa8afb705db684e87d22868d5d85557.png?v=20222710&quot;); background-position: 84% 2.5%; margin: -1px; position: relative; top: 2px;">:-((</span></div><div class="reaction-emoji-icon" style="animation-delay: 120ms;"><span class="emoji-sizer emoji-outer " style="background-size: 5100%; background-repeat: no-repeat; -webkit-user-drag: none; background-image: url(&quot;assets/emoji-md.6fa8afb705db684e87d22868d5d85557.png?v=20222710&quot;); background-position: 84% 5%; margin: -1px; position: relative; top: 2px;">:-h</span></div></div><div class="reaction-emoji-bottom"></div></div></div><div id="reaction-canvas-layer-05212495247434" class="react-effect  me "></div><div id="reaction-canvas-layer-15212495247434" class="react-effect  me "></div></div></div></div></div>`
 
-    client.on('message', (message: MessageCallback) => {
-          // Accessing properties of the message object
-          console.log('Content:', message.content);
-          console.log('Time:', message.time);
-          console.log('Message ID:', message.messageId);
-          console.log('Author Name:', message.author.name);
-          message.author.reply('Your reply here')
-    });
+// Sử dụng Cherio để phân tích mã HTML
+const $ = cherio.load(html);
 
-    client.once('ready',(user : User) => {
-      console.log(user)
-    })
-})();
+// Tìm phần tử chứa emoji
+const emojiElement = $('.emoji-sizer.emoji-outer.larger');
+
+// Lấy nội dung văn bản (mã emoji)
+
+if(emojiElement.length > 0){
+  const emojiCode = emojiElement.text();
+}

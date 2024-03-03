@@ -4,7 +4,7 @@ export * from './types'
 import Events from "./events";
 import Actions from "./actions";
 import { MessageCallback } from "./types/MessageListener";
-import { User } from "./types";
+import { MessageOptions, User } from "./types";
 export { init }
 export default class Client {
     private page: Page;
@@ -25,13 +25,10 @@ export default class Client {
         await this.events.once(event, callback);
     }
 
-    async sendMessage(message: string): Promise<void> {
-        await this.actions.sendMessage(message);
+    async send(message: MessageOptions): Promise<void> {
+        await this.actions.send(message);
     }
-    async sendImage(path : string): Promise<void> {
-        this.actions.sendImage(path)
-    }
-    async toGroup(groupName: string, groupSelector: string): Promise<void> {
-        await this.actions.toGroup(groupName, groupSelector);
+    async toConverstation(groupName: string, groupSelector: string): Promise<void> {
+        await this.actions.toConverstation(groupName, groupSelector);
     }
 }

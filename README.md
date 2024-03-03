@@ -3,15 +3,14 @@
 <p>
   <img src="https://raw.githubusercontent.com/DaQMinh/Zalojs/main/public/logo.svg" alt="Zalo">
 </p>
-<a>
-
-<img src="https://img.shields.io/badge/Zalo-Join-5bc0de?style=for-the-badge)" alt="Zalo Badge">
+<a href="https://zalo.me/g/odfcim076">
+<img src="https://img.shields.io/badge/Zalo-Join-5bc0de?style=for-the-badge" alt="Zalo Badge">
 </a>
 <a href="https://www.npmjs.com/package/zalojs">
-  <img src="https://img.shields.io/npm/dt/zalojs?style=for-the-badge)" alt="npm downloads">
+  <img src="https://img.shields.io/npm/dt/zalojs?style=for-the-badge" alt="npm downloads">
 </a>
 <a href="https://www.npmjs.com/package/zalojs">
-  <img src="https://img.shields.io/npm/v/zalojs?style=for-the-badge)" alt="npm version">
+  <img src="https://img.shields.io/npm/v/zalojs?style=for-the-badge" alt="npm version">
 </a>
 
 </div>

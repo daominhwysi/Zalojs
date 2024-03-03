@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Card</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Your custom styles here */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            max-width: 400px; /* Adjust the value to your desired width */
+            background-color: #FFFFFF;
+            border: 1px solid #CCCCCC;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-menu {
+            background-color: #FFFFFF; /* Change to the desired color */
+            border-bottom: 1px solid #F2F2F2; /* Add a border below the tab menu */
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .tab-menu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tab-menu li {
+            cursor: pointer;
+            font-weight: bold;
+            color: #666666;
+        }
+
+        .tab-menu li:hover {
+            color: #333333;
+        }
+
+        .tab-menu li.active {
+            color: #000000;
+        }
+
+        .card-content {
+            padding: 10px;
+        }
+
+        .paragraph {
+            font-size: 16px;
+            color: #666666;
+            text-align: center;
+            margin-top: 20px; /* Adjust margin as needed */
+        }
+
+        .card-content h2 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .qr-code-box {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .qr-code-box img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #logo {
+            max-width: 300px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Căn giữa theo chiều ngang */
+        }
+
+        .paragraph-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .border-round {
+            border: 2px solid #CCCCCC;
+            border-radius: 20px; /* Adjust the value to change the roundness */
+            padding: 10px; /* Adjust the padding as needed */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="item"><img src="https://raw.githubusercontent.com/DaQMinh/Zalojs/main/public/logo.svg" alt="Logo" id="logo"></div>
+    <div class="item">
+        <div class="card">
+            <div class="tab-menu">
+                <ul class="nav  nav-underline">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">QR Code</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Điện thoại</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-content">
+                <div class="qr-code-box border-round">
+                    <img id='qr' src="<%= imageSrc %>" alt="QR Code">
+                </div>
+            </div>
+            <div class="paragraph-wrapper">
+                <div style="display: inline-block;" class="paragraph">
+                    <button class="btn btn-primary btn-sm" id="qrRefresh" style="display: inline;">Làm mới QR</button>
+                    <p style="display: inline;">Sử dụng ứng dụng Zalo để quét mã QR</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    document.getElementById('qrRefresh').addEventListener('click', () => {
+        // Send an event to the server
+        socket.emit('refreshQR');
+    });
+    socket.on('changeImage', (newImageUrl) => {
+        document.getElementById('qr').src = newImageUrl;
+    });
+</script>
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

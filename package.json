@@ -1,13 +1,13 @@
 {
   "name": "zalojs",
   "description": "This is an API to control Zalo over the DevTools Protocol which is allow you to make a Client bot",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "homepage": "https://daominh.space",
   "repository": {
-    "url": "git+https://github.com/DaQMinh/Zalo.js.git"
+    "url": "git+https://github.com/DaQMinh/Zalojs.git"
   },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",

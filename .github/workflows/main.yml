@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: Patch NPM package version
-        run: npm version patch --no-git-tag-version
+        run: npm version patch
 
       - name: Build
         run: npm run build && npm run lint

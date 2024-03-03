@@ -20,7 +20,7 @@ export default async function init(options: InitOptions) {
 
     
     app.set('view engine', 'ejs');
-    app.set('views', path.join(__dirname, '../views'));
+    app.set('views', path.join(__dirname, '../src/views'));
     app.use(express.static(path.join(__dirname, 'public')));
     
 
@@ -57,8 +57,7 @@ export default async function init(options: InitOptions) {
                 }
             });
         })
-
-
+        
         page.on("framenavigated", async (frame: any) => {
             const url = frame.url(); // the new url
             if (url.startsWith("https://chat.zalo.me/") && !isLogin) {

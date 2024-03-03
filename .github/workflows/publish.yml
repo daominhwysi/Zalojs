@@ -1,34 +1,25 @@
 name: Publish
+
 on:
   push:
     branches:
-      - "main"
+      - main
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
-permissions:
-  actions: write       # Necessary to cancel workflow executions
-  checks: write        # Necessary to write reports
-  pull-requests: write # Necessary to comment on PRs
-  contents: read
-  packages: write
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: zalojs/action-setup@v2
-        with:
-          version: 7
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 16.x
-          cache: "npm"
 
-      - run: npm install --frozen-lockfile
-      - name: Create Release Pull Request or Publish
-        id: changesets
-        uses: changesets/action@v1
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          publish: npm run build
+          node-version: '16.x'
+
+      # Example of deploying to npm registry
+      - name: Publish to npm
+        run: npm publish --access public
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Make sure to set up this secret in your repository settings

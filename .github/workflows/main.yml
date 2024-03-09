@@ -27,13 +27,7 @@ jobs:
       - name: Set up Git
         run: |
           git config --global user.email "daominhwysi@gmail.com"
-          git config --global user.name "DaQMinh"
-
-      - name: Commit changes
-        run: |
-          git add package-lock.json
-          git commit -m "chore: Update package-lock.json"
-
+          git config --global user.name "daominhwysi"
       - name: Install dependencies
         run: npm install
 

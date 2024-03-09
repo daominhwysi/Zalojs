@@ -1,8 +1,11 @@
-import getAllMessage from './getAllMessage';
-import sendMessage from '../../actions/send';
+import getMessage from './getMessage';
 import { HTTPRequest, Page } from 'puppeteer';
 import { User } from '../../types/user';
-export default async function messageListener(page: Page, callback: Function, user: User | null): Promise<void> {
+const messageArray: { content: string | undefined; name: string | undefined; messageId: string | undefined; time: string; }[] = []
+export function getAllMessage(){
+    return messageArray
+}
+export async function messageListener(page: Page, callback: Function, user: User | null): Promise<void> {
     let isRunning = false;
     page.on('request', async (request: HTTPRequest) => {
        
@@ -10,13 +13,13 @@ export default async function messageListener(page: Page, callback: Function, us
             const startTime = process.hrtime.bigint();
             isRunning = true
             // store.dispatch(toggle());
-            const messageArray = await getAllMessage(page, user);
-            await page.evaluate((messageArray) => {
+            const message = await getMessage(page, user);
+            await page.evaluate((message) => {
                 var elementsByClass = document.querySelectorAll('.rel.zavatar-container.avatar--overlay');
                 elementsByClass.forEach(function (element) {
                     element.remove();
                 });
-                const messageIdArray = messageArray.map(obj => obj.messageId);
+                const messageIdArray = message.map(obj => obj.messageId);
                 messageIdArray.forEach(function (id) {
                     if (id) {
                         var element = document.getElementById(id);
@@ -31,9 +34,17 @@ export default async function messageListener(page: Page, callback: Function, us
                     }
                 });
 
-            }, messageArray);
-            if (messageArray.length != 0 && messageArray) {
-                callback(messageArray);
+            }, message);
+            if (message.length != 0 && message) {
+                message.forEach(element => {
+                    messageArray.push({
+                        content : element.content,
+                        name : element.name,
+                        messageId : element.messageId,
+                        time : element.time
+                    })
+                });
+                callback(message);
             }
             isRunning = false
 //22 mil second

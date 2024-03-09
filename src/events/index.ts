@@ -1,5 +1,5 @@
 import { Page } from "puppeteer";
-import messageListener from "./messageListener";
+import { messageListener } from "./messageListener";
 import { eventEmitter } from "../core/init";
 import { store } from '../state'
 import { User } from "../types";

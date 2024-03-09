@@ -3,7 +3,7 @@ import { Page } from 'puppeteer';
 import { User } from '../../types/user';
 import { store , setPreviousName } from '../../state';
 
-export default async function getAllMessage(page: Page, user: User | null) {
+export default async function getMessage(page: Page, user: User | null) {
     // const resultArray: string[][] = await page.evaluate(() => {
     //     const elements = document.querySelectorAll('.chat-content.flx.flx-col.flx-cell');
     //     const resultArray: string[][] = [];

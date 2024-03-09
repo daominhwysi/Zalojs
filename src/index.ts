@@ -66,4 +66,7 @@ export default class Client {
             console.error("Error while switching conversation:", error);
         }
     }
+    getAllMessage(){
+        return this.actions.getAllMessage()    
+    }
 }

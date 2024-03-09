@@ -12,9 +12,6 @@
 <a href="https://www.npmjs.com/package/zalojs">
   <img src="https://img.shields.io/npm/v/zalojs?style=for-the-badge" alt="npm version">
 </a>
-<a href="https://zalojs.gitbook.io/documentation">
-  <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg">
-</a>
 </div>
 
 <!-- ABOUT THE PROJECT -->

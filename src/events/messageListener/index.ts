@@ -1,4 +1,5 @@
 import getAllMessage from './getAllMessage';
+import sendMessage from '../../actions/send';
 import { HTTPRequest, Page } from 'puppeteer';
 import { User } from '../../types/user';
 export default async function messageListener(page: Page, callback: Function, user: User | null): Promise<void> {
@@ -20,7 +21,12 @@ export default async function messageListener(page: Page, callback: Function, us
                     if (id) {
                         var element = document.getElementById(id);
                         if (element) {
-                            element.remove()
+                            var newId = id.replace("bb_msg_id_", "read");
+                            element.id = newId;
+                            var elementsById = document.querySelectorAll('[id*=read]');
+                            elementsById.forEach(function (element) {
+                                element.remove();
+                            });
                         }
                     }
                 });
@@ -29,8 +35,10 @@ export default async function messageListener(page: Page, callback: Function, us
             if (messageArray.length != 0 && messageArray) {
                 callback(messageArray);
             }
-            isRunning = false;
+            isRunning = false
 //22 mil second
+
         }
+
     });
 }

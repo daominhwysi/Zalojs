@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "jsx": "preserve",
         "strict": true,
         "noImplicitAny": true,
         "esModuleInterop": true,

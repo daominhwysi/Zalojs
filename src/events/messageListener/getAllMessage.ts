@@ -1,47 +1,79 @@
 import * as cheerio from 'cheerio';
 import { Page } from 'puppeteer';
 import { User } from '../../types/user';
+import { store , setPreviousName } from '../../state';
 
 export default async function getAllMessage(page: Page, user: User | null) {
+    // const resultArray: string[][] = await page.evaluate(() => {
+    //     const elements = document.querySelectorAll('.chat-content.flx.flx-col.flx-cell');
+    //     const resultArray: string[][] = [];
+    //     elements.forEach((element: Element) => {
+    //       const childElements = element.querySelectorAll('*[id]');
+    //       const childArray: string[] = [];
+    //       childElements.forEach((childElement: Element) => {
+    //         if (childElement.id && childElement.id.includes('bb_msg_id_')) {
+    //           childArray.push(childElement.outerHTML);
+    //         }
+    //       });
+    //       resultArray.push(childArray);
+    //     });
+    
+    //     return resultArray;
+    // });
+    // const messages: any[][] = resultArray.map((row: string[]) => {
+    //   return row.map((element: string) => {
+
+    //   });
+    // });
+    const previousName = store.getState().previousName;
     const elements = await page.evaluate(() => {
-        const elements = document.querySelectorAll('[id*=bb_msg_id_]');
-        return Array.from(elements).map(element => element.outerHTML);
+      const elements = document.querySelectorAll('[id*=bb_msg_id_]');
+      return Array.from(elements).map(element => element.outerHTML);
     });
 
-    const messages = elements.map((item: string) => {
-        const $ = cheerio.load(item);
-        let senderName = "Client"; // Mặc định là "Client"
-        const userExists = user && user.name; // Kiểm tra xem user tồn tại và có thuộc tính name không
-        if (userExists) {
-            senderName = user.name;
-        }
-        
-        // Lấy nội dung và thông tin của tin nhắn
-        const messageId = $('.chat-message').attr('id')
-        const time = $('.card-send-time__sendTime').text().trim();
-        let content: string | string[] | undefined; // Chỉnh sửa kiểu của content
-        
-        // Tin nhắn hình ảnh
-        const imageMessage = $('div.chatImageMessage');
-        if (imageMessage.length > 0) {
-            const imageSrc = $('img').attr('src');
-            content = imageSrc;
-        }
+  const messages = elements.map((element: string) => {
+    const $ = cheerio.load(element);
+    const messageId = $('.chat-message').attr('id');
+    const time = $('.card-send-time__sendTime').text().trim();
+    let content: string | undefined; // Adjust content type
 
-        const textMessage = $('div.card--text');
-        if (textMessage.length > 0) {
-            content = textMessage.find('.text').text().trim() || undefined;
-        }
-        const emojiElement = $('.emoji-sizer.emoji-outer.larger');
+    function getName() {
+      const isMyMessage = $('.wrap-message').hasClass('me');
 
-        // Lấy nội dung văn bản (mã emoji)
-        
-        if(emojiElement.length > 0){
-          const emojiCode = emojiElement.text();
-          content = emojiCode;
-        }
-        return { messageId, content, time, senderName };
-    });
+      if (isMyMessage) {
+          return user?.name;
+      } else {
+          const senderNameElement = $('.card-sender-name span');
+          if (senderNameElement.length > 0) {
+              store.dispatch(setPreviousName(senderNameElement.text().trim()));
+              return senderNameElement.text().trim();
+          } else {
+              return previousName;
+          }
+      }
+    }
 
-    return messages;
+    const imageMessage = $('div.chatImageMessage');
+    if (imageMessage.length > 0) {
+        const imageSrc = $('img').attr('src');
+        content = imageSrc;
+    }
+
+    const textMessage = $('div.card--text');
+    if (textMessage.length > 0) {
+        content = textMessage.find('.text').text().trim() || undefined;
+    }
+
+    const emojiElement = $('.emoji-sizer.emoji-outer.larger');
+    if (emojiElement.length > 0) {
+      const emojiCode = emojiElement.text();
+      content = emojiCode;
+    }
+
+    const name = getName();
+    
+    return { content , name , messageId , time };
+  });
+
+  return messages;
 }

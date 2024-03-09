@@ -1,11 +1,11 @@
 {
   "name": "zalojs",
   "description": "This is an API to control Zalo over the DevTools Protocol which is allow you to make a Client bot",
-  "version": "1.1.5",
+  "version": "2.0.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "homepage": "https://daominh.space",
+  "homepage": "https://zalojs.gitbook.io/documentation/",
   "repository": {
     "url": "git+https://github.com/DaQMinh/Zalojs.git"
   },
@@ -15,16 +15,18 @@
     "lint": "tsc"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.1",
     "cheerio": "^1.0.0-rc.12",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "nodemon": "^3.0.3",
     "puppeteer": "^22.1.0",
-    "socket.io": "^4.7.4"
+    "socket.io": "^4.7.4",
+    "ws": "^8.16.0"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.1",
     "@types/express": "^4.17.21",
+    "@types/ws": "^8.5.10",
     "ts-node": "^10.9.2",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3"

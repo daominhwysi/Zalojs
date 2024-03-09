@@ -33,16 +33,16 @@ Zalo.JS is a project that offers an API for controlling the Zalo client programm
 
 2. **Installation:** Install the Zalo.JS package by running 
   ```sh
-  npm i zalojs@latest
+  $ npm i zalojs@latest
   ```
 
 <!-- USAGE EXAMPLES -->
 ### Usage
 
 ```js
-const { init } = require('../dist/index.js');
+const { init } = require('zalojs');
 const config = require('./config.json');
-const Client = require('../dist/index.js').default;
+const Client = require('zalojs').default;
 const fs = require('fs');
 const path = require('path');
 
@@ -50,31 +50,36 @@ const prefix = '!';
 
 (async () => {
   const { browser, page } = await init({
-    groupName: config.gname,
-    groupSelector: config.gselector,
+    groupName: config.groupName,
+    groupID: config.groupID,
     headless: config.headless,
   });
 
   const client = new Client(page);
+  const commandFiles = fs.readdirSync(path.join(__dirname, 'commands')).filter(file => file.endsWith('.js'));
 
-  client.on('message', async (message) => {
-    console.log(message)
-    if (!message.content.startsWith(prefix)) return;
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
-    const commandName = args.shift().toLowerCase();
-
-    try {
-    if (command === 'ping') {
-      await client.send({ message :'!Pong' });
-    }
-    } catch (error) {
-      console.log(error);
-      await client.send({ message :'There was an error executing the command.' });
-    }
+  client.on("message", (message) => {
+    message.forEach( async (element) => {
+          if (!element.content) return;
+          if (!element.content.startsWith(prefix)) return;
+          const args = element.content.slice(prefix.length).trim().split(/ +/);
+          const commandName = args.shift().toLowerCase();
+          const commandFile = commandFiles.find(
+            (file) => file.split(".").shift() === commandName,
+          );
+          if (!commandFile) return;
+          const command = require(path.join(__dirname, "commands", commandFile));
+          try {
+            await command(element, client, args);
+          } catch (error) {
+            console.log(error);
+            await client.send({ message: "There was an error executing the command." });
+          }
+    });
   });
 
   client.once('ready', () => {
-    console.log('Bot is ready!');
+    console.log(`Bot is ready! ${client.user.name}`);
   });
 })();
 
@@ -82,8 +87,8 @@ const prefix = '!';
 **Config File:**
 ```json
 {
-  "gselector": "your-group/user-selector", //#group-item-g5701541405487732670
-  "gname": "your-group/user-name", //Testing
+  "groupID": "your-group/user-ID", //#group-item-g5701541405487732670
+  "groupName": "your-group/user-name", //Testing
   "headless" : true //turn to true when production
 }
 ```

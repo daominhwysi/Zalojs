@@ -1,33 +1,28 @@
 import { Page } from "puppeteer";
 import messageListener from "./messageListener";
-import { User } from "../types/user";
-import { events } from "../core/init";
-import scrapeData from "../core/scrapeData";
-import { MessageCallback } from "../types";
-
+import { eventEmitter } from "../core/init";
+import { store } from '../state'
+import { User } from "../types";
 export default class Events {
     private page: Page;
-    public user: User;
-
-    constructor(page: Page, user: User) {
+    user : User;
+    constructor(page: Page) {
         this.page = page;
-        this.user = user;
-        this.connect();
+        this.user = null;
+        this.connect()
     }
-
-    private async connect(): Promise<void> {
-        // Wait for initialization, then scrape data and emit 'ready'
-        events.once('initialized', async () => {
-            this.user = await scrapeData(this.page);
-            events.emit('ready');
+    private connect(): void {
+        eventEmitter.once('scraped', async () => {
+            this.user = store.getState().user;
+            eventEmitter.emit('ready')
         });
     }
 
-    async on(event: string, callback: (user: MessageCallback) => void): Promise<void> {
+
+    async on(event: string, callback: Function): Promise<void> {
         switch (event) {
             case "message":
-                // When 'ready' event occurs, invoke messageListener with page, callback, and user
-                events.once('ready', () => messageListener(this.page, callback, this.user));
+                eventEmitter.on('ready', () => messageListener(this.page, callback, this.user));
                 break;
             default:
                 console.log("It's something else.");
@@ -37,8 +32,7 @@ export default class Events {
     async once(event: string, callback: () => void): Promise<void> {
         switch (event) {
             case "ready":
-                // When 'ready' event occurs, invoke the callback with the current user
-                events.once('ready', () => callback());
+                eventEmitter.once('ready', () => callback());
                 break;
             default:
                 console.log("It's something else.");

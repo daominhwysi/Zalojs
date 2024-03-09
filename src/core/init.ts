@@ -7,17 +7,17 @@ import { Server } from 'socket.io';
 import { EventEmitter } from 'events';
 interface InitOptions {
     groupName: string;
-    groupSelector: string;
+    groupID: string;
     headless?: boolean;
+    port? : boolean
 }
-const events = new EventEmitter()
+const eventEmitter = new EventEmitter()
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 export default async function init(options: InitOptions) {
-    const { groupName, groupSelector, headless = true } = options;
+    const { groupName, groupID, headless = true , port = 3000 } = options;
     let isLogin = false;
-
     
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, '../src/views'));
@@ -62,18 +62,18 @@ export default async function init(options: InitOptions) {
             const url = frame.url(); // the new url
             if (url.startsWith("https://chat.zalo.me/") && !isLogin) {
                 isLogin = true;
-                await toConversation(page, groupName, groupSelector);
+                await toConversation(page, groupName, '#group-item-' + groupID);
                 page.off("framenavigated");
                 page.removeAllListeners("request");
-                events.emit('initialized');
+                eventEmitter.emit('initialized');
             }
  
         });
-        const PORT = process.env.PORT || 3000;
+        
 
 
-        server.listen(PORT, () => {
-          console.log(`Server is running on port ${PORT}`);
+        server.listen(port, () => {
+          console.log(`Server is running on port http://localhost:${port}`);
         });
         return { browser, page };
     } catch (error) {
@@ -82,4 +82,4 @@ export default async function init(options: InitOptions) {
     }
 }
 
-export { events };
+export { eventEmitter };

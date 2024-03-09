@@ -11,5 +11,5 @@ export default class Actions {
     }
     async send(message : MessageOptions):  Promise<void> {if(message) {await send(this.page,message)} else { throw new Error("Type of message is", message)} }
     async toConversation(groupName: string, groupId: string): Promise<void> { if(groupId && groupName) {await toConversation(this.page, groupName, groupId)} else { throw new Error("Type of group Name or GroupID is undefined");} }
-    async getAllMessage(){ return getAllMessage() }
+    getAllMessage(){ return getAllMessage() }
 }

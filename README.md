@@ -3,15 +3,8 @@
 <p>
   <img src="https://raw.githubusercontent.com/DaQMinh/Zalojs/main/public/logo.svg" alt="Zalo">
 </p>
-<a href="https://zalo.me/g/odfcim076">
-<img src="https://img.shields.io/badge/Zalo-Join-5bc0de?style=for-the-badge" alt="Zalo Badge">
-</a>
-<a href="https://www.npmjs.com/package/zalojs">
-  <img src="https://img.shields.io/npm/dt/zalojs?style=for-the-badge" alt="npm downloads">
-</a>
-<a href="https://www.npmjs.com/package/zalojs">
-  <img src="https://img.shields.io/npm/v/zalojs?style=for-the-badge" alt="npm version">
-</a>
+  <h4> Unstable , unreliable , minimalist 
+  <br/>Zalo Scraper library for Nodejs</h4>
 </div>
 
 <!-- ABOUT THE PROJECT -->
@@ -86,9 +79,9 @@ const prefix = '!';
 **Config File:**
 ```json
 {
-  "groupID": "your-group/user-ID", //#group-item-g5701541405487732670
+  "groupID": "your-group/user-ID", //#g5701541405487732670
   "groupName": "your-group/user-name", //Testing
-  "headless" : true //turn to true when production
+  "headless" : true
 }
 ```
 

@@ -8,6 +8,7 @@ export default class Actions {
     constructor(page: Page) {
         this.page = page;
     }
-    async send(message : MessageOptions):  Promise<void> { await send(this.page,message) }
-    async toConversation(groupName: string, groupId: string): Promise<void> { await toConversation(this.page, groupName, groupId) }
+    async send(message : MessageOptions):  Promise<void> {if(message) {await send(this.page,message)} else { throw new Error("Type of message is", message)} }
+    async toConversation(groupName: string, groupId: string): Promise<void> { if(groupId && groupName) {await toConversation(this.page, groupName, groupId)} else { throw new Error("Type of group Name or GroupID is undefined");
+    } }
 }

@@ -25,7 +25,7 @@ export default async function getAllMessage(page: Page, user: User | null) {
 
     //   });
     // });
-    const previousName = store.getState().previousName;
+    const previousName = store.getState().previousName.value;
     const elements = await page.evaluate(() => {
       const elements = document.querySelectorAll('[id*=bb_msg_id_]');
       return Array.from(elements).map(element => element.outerHTML);

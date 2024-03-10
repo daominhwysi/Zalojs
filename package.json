@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "homepage": "https://zalojs.gitbook.io/documentation/",
+  "homepage": "https://zalojs.gitbook.io/docs-1/",
   "repository": {
     "url": "git+https://github.com/DaQMinh/Zalojs.git"
   },

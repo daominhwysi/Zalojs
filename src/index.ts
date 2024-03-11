@@ -13,7 +13,7 @@ export default class Client {
     private page: Page;
     private events: Events;
     private actions: Actions;
-    private user: User | null;
+    private user: User | null
 
     constructor(page: Page) {
         this.page = page;

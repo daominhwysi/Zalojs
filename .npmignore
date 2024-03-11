@@ -6,4 +6,4 @@ tsup.config.ts
 /example
 /config
 /test
-/.changeset
+/.github

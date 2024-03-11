@@ -15,7 +15,6 @@ export default async function sendMessage(page: Page, options: MessageOptions) {
         await sendFile(page, options.file);
     }
 }
-
 async function sendMessageText(page: Page, message: string) {
     await page.waitForSelector('#input_line_0');
     await page.type('#input_line_0', message);

@@ -12,7 +12,8 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "test": "nodemon test/main.ts",
-    "lint": "tsc"
+    "lint": "tsc",
+    "ex" : "node example/index.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",

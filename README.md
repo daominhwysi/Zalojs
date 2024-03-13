@@ -2,15 +2,23 @@
 <div align="center">
 <p>
   <img src="https://raw.githubusercontent.com/DaQMinh/Zalojs/main/public/logo.svg" alt="Zalo">
-  <h4> Unstable , unreliable , minimalist 
-  <br/>Zalo Scraper library for Nodejs</h4>
+
+
 </p>
+<a href="https://zalo.me/g/dcbase359">
+<img src="https://img.shields.io/badge/chat-join-blue?style=flat-square&logo=zalo">
+</a>
+<a href="https://www.npmjs.com/package/zalojs">
+  <img src="https://img.shields.io/npm/v/zalojs.svg?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/npm/dt/zalojs.svg?style=flat-square" alt="Total Downloads">
+</a>
+
 
 </div>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-ZaloJS is a powerful high-level scraping API designed for accessing data from Zalo, a popular messaging platform in Vietnam. This versatile tool provides developers with the means to extract various types of data from Zalo, enabling them to build applications, gather insights, and automate tasks effectively.
+ZaloJS is a unstable , unreliable , high-level scraping API designed for accessing data from Zalo, a popular messaging platform in Vietnam. This versatile tool provides developers with the means to extract various types of data from Zalo, enabling them to build applications, gather insights, and automate tasks effectively.
 <!-- GETTING STARTED -->
 ### Use Cases
 - Chatbot Development: Develop chatbots capable of interacting with Zalo users, responding to messages, providing information, and executing tasks.

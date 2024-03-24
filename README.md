@@ -17,7 +17,10 @@
 </div>
 
 
-https://github.com/daominhwysi/Zalojs/assets/114815151/64a063a8-71c5-489e-adef-cbd00c16567d
+
+https://github.com/daominhwysi/Zalojs/assets/114815151/b919108c-eb53-409a-9fc1-70e5720fcecd
+
+
 
 
 <!-- ABOUT THE PROJECT -->

@@ -16,6 +16,10 @@
 
 </div>
 
+
+https://github.com/daominhwysi/Zalojs/assets/114815151/64a063a8-71c5-489e-adef-cbd00c16567d
+
+
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 ZaloJS is a unstable , unreliable , high-level scraping API designed for accessing data from Zalo, a popular messaging platform in Vietnam. This versatile tool provides developers with the means to extract various types of data from Zalo, enabling them to build applications, gather insights, and automate tasks effectively.
